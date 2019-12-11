@@ -62,7 +62,7 @@ vector<unsigned int> backtrack(vector<unsigned int> cp_raw) {
 }
 
 template <typename Tx, typename Ty>
-OPResult<Tx, Ty> op1D(vector<Tx> &x, vector<Ty> &y, double beta) {
+OPResult<Tx, Ty> op1D(vector<Tx> &x, vector<Ty> &y, double beta, int cp_number=0) {
   /* detect changepoints with OP algorithm */
   assert(x.size() == y.size());
   unsigned int n = y.size();
