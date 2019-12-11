@@ -62,7 +62,8 @@ vector<unsigned int> backtrack(vector<unsigned int> cp_raw) {
 }
 
 template <typename Tx, typename Ty>
-OPResult<Tx, Ty> op1D(vector<Tx> &x, vector<Ty> &y, double beta, int cp_number=0) {
+OPResult<Tx, Ty> op1D(vector<Tx> &x, vector<Ty> &y, double beta,
+                      int cp_number = 0) {
   /* detect changepoints with OP algorithm */
   assert(x.size() == y.size());
   unsigned int n = y.size();
@@ -119,24 +120,26 @@ OPResult<Tx, Ty> op1D(vector<Tx> &x, vector<Ty> &y, double beta, int cp_number=0
   vector<Tx> xs((cp1.size() - 1) * 2);
 
   Tx xa, xb;
-  Ty ya, yb;
-
+  float ya;
+  unsigned int idx;
   for (unsigned int i = 0; i < cp1.size() - 1; i++) {
     if (i == 0) {
-      xa = x[cp1[i]];
+      idx = cp1[i];
     } else {
-      xa = x[cp1[i]] + 1;
+      idx = cp1[i] + 1;
     }
-
+    xa = x[idx];
     xb = x[cp1[i + 1]];
+    ya = std::accumulate(y.begin() + idx, y.begin() + cp1[i + 1], 0.0) /
+         (cp1[i + 1] - idx);
 
     xs[i * 2] = xa;
     xs[i * 2 + 1] = xb;
     ys[i * 2] = ya;
-    ys[i * 2 + 1] = yb;
+    ys[i * 2 + 1] = ya;
   }
 
-  return OPResult<Tx, Ty>(cp, xs, ys, q[y.size() - 2]);
+  return OPResult<Tx, float>(cp, xs, ys, q[y.size() - 2]);
 }
 
 template <typename Tx, typename Ty>
@@ -273,7 +276,8 @@ OPResult<Tx, Ty> op2Dcc(vector<Tx> &x, vector<Ty> &y, double beta) {
 
     for (unsigned int i = 0; i < P.size(); i++) {
       tau = P[i];
-      if (t-tau == 1) continue;
+      if (t - tau == 1)
+        continue;
       pt.x = x[tau];
       pt.y = y_end[tau];
       transform(x.begin(), x.end(), x_trans.begin(),
