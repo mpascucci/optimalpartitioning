@@ -19,7 +19,7 @@ op2D : OP for piece-wise continuous linear signals (with continuity constraint).
 
 This repo uses Pybind as a submodule. This requires attention when cloning. Please do:
 
-    git clone --recursive git://github.com/foo/bar.git  
+    git clone --recursive git://github.com/mpascucci/optimalpartitioning 
 
 ## install Python
 Execute one of the following commands in the base folder of the repo.
