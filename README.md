@@ -11,7 +11,7 @@ op2D : OP for piece-wise linear signals
 
 ![](doc/img/op2d.png)
 
-op2D : OP for piece-wise continuous linear signals with continuity constraint. Thi function does not find the optimal solution (in term of square error) but has the same complecity as OP and is optimized with the same pruning.
+op2D : OP for piece-wise continuous linear signals (with continuity constraint). This function does not find the optimal solution (in term of square error) but has the same complexity as OP and is optimized with the same pruning.
 
 ![](doc/img/op2dcc.png)
 
